@@ -51,7 +51,7 @@ Visit [Live Demo](https://pallanguzhi-web.vercel.app) to play now!
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/viralvfx/pallanguzhi-web.git
+git clone https://github.com/ziora-studios/pallanguzhi-web.git
 cd pallanguzhi-web
 ```
 
@@ -118,7 +118,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🔗 Links
 
 - **Live Demo**: [https://pallanguzhi-web.vercel.app](https://pallanguzhi-web.vercel.app)
-- **Repository**: [https://github.com/viralvfx/pallanguzhi-web](https://github.com/viralvfx/pallanguzhi-web)
+- **Repository**: [https://github.com/ziora-studios/pallanguzhi-web](https://github.com/ziora-studios/pallanguzhi-web)
 - **Studio Website**: [Ziora Studios](https://ziorastudios.com) *(coming soon)*
 
 ---
