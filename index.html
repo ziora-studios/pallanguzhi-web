@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pallanguzhi by Ziora Studios - Traditional Tamil Game</title>
+    <meta name="description" content="Ancient Tamil strategy game with AI opponents">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Pallanguzhi">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container" id="game-container">
+        <div class="header-section">
+            <div class="studio-branding">
+                <span class="studio-name">ZIORA STUDIOS</span>
+                <span class="studio-tagline">PRESENTS</span>
+            </div>
+            <h1>Pallanguzhi</h1>
+            <p class="subtitle">South Indian version of Mancala</p>
+        </div>
+        <div class="players-section">
+            <div class="player-card player1-card" id="player1-card">
+                <div class="player-avatar">
+                    <div class="player-icon">P1</div>
+                </div>
+                <div class="player-details">
+                    <h3>Player 1</h3>
+                    <div class="score-display">
+                        <span class="score-label">Score:</span>
+                        <span class="score-value" id="player1-score">0</span>
+                    </div>
+                    <div class="player-dots-container" id="player1-dots"></div>
+                </div>
+                <div class="turn-indicator" id="player1-indicator"></div>
+            </div>
+
+            <div class="game-controls">
+                <div class="winning-probability-bar">
+                    <div class="probability-label">Winning Probability</div>
+                    <div class="probability-container">
+                        <div class="probability-bar">
+                            <div class="probability-fill player1-fill" id="player1-probability"></div>
+                            <div class="probability-fill player2-fill" id="player2-probability"></div>
+                        </div>
+                        <div class="probability-labels">
+                            <span class="p1-label">P1</span>
+                            <span class="p2-label">P2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-buttons">
+                    <button id="home-btn">HOME</button>
+                    <button id="rules-btn">RULES</button>
+                    <button id="about-btn">ABOUT</button>
+                    <button id="sound-btn">🔊</button>
+                </div>
+            </div>
+
+            <div class="player-card player2-card" id="player2-card">
+                <div class="player-avatar">
+                    <div class="player-icon">P2</div>
+                </div>
+                <div class="player-details">
+                    <h3>Player 2</h3>
+                    <div class="score-display">
+                        <span class="score-label">Score:</span>
+                        <span class="score-value" id="player2-score">0</span>
+                    </div>
+                    <div class="player-dots-container" id="player2-dots"></div>
+                </div>
+                <div class="turn-indicator" id="player2-indicator"></div>
+            </div>
+        </div>
+
+        <div class="board">
+            <!-- Player 2's side (top) - arranged right to left for counter-clockwise flow -->
+            <div class="player-side player2-side">
+                <div class="pit" data-pit="13" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="12" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="11" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="10" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="9" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="8" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="7" data-player="2">
+                    <div class="dots-container"></div>
+                </div>
+            </div>
+
+            <!-- Player 1's side (bottom) - arranged left to right -->
+            <div class="player-side player1-side">
+                <div class="pit" data-pit="0" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="1" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="2" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="3" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="4" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="5" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+                <div class="pit" data-pit="6" data-player="1">
+                    <div class="dots-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-status">
+            <div class="current-turn" id="current-player">Player 1's Turn</div>
+        </div>
+
+        <!-- Footer with studio attribution -->
+        <div class="game-footer">
+            <div class="footer-content">
+                <span class="footer-studio">© 2024 Ziora Studios</span>
+                <span class="footer-separator">•</span>
+                <span class="footer-tagline">Preserving Heritage Through Gaming</span>
+            </div>
+        </div>
+
+        <!-- Title Card popup -->
+        <div class="title-card-popup" id="title-card-popup">
+            <div class="title-card-content">
+                <div class="title-card-header">
+                    <div class="title-studio-branding">
+                        <div class="title-studio-logo">ZIORA STUDIOS</div>
+                        <div class="title-studio-tagline">PRESENTS</div>
+                    </div>
+                    <h1 class="retro-title">PALLANGUZHI</h1>
+                    <p class="retro-subtitle">Ancient Tamil Strategy Game</p>
+                    <div class="retro-tagline">Experience 1000+ Years of Gaming Heritage</div>
+                </div>
+                <div class="title-card-body">
+                    <button class="retro-play-btn" id="retro-play-btn">
+                        <div class="play-icon">▶</div>
+                        <div class="play-text">PLAY NOW!</div>
+                        <div class="play-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Mode Selection popup -->
+        <div class="game-mode-popup" id="game-mode-popup" style="display: none;">
+            <div class="game-mode-content">
+                <div class="game-mode-header">
+                    <h3>Pallanguzhi</h3>
+                    <p class="game-mode-subtitle">Choose Your Game Mode</p>
+                </div>
+                <div class="game-mode-body">
+                    <div class="mode-selection">
+                        <button class="mode-btn" id="pvp-btn">
+                            <div class="mode-icon">P1 P2</div>
+                            <div class="mode-title">Player vs Player</div>
+                            <div class="mode-desc">Challenge a Friend</div>
+                            <div class="mode-subtitle">Classic 2-Player Mode</div>
+                        </button>
+                        <button class="mode-btn" id="cpu-btn">
+                            <div class="mode-icon">CPU</div>
+                            <div class="mode-title">Player vs CPU</div>
+                            <div class="mode-desc">Challenge the Computer</div>
+                            <div class="mode-subtitle">AI Opponent Available</div>
+                        </button>
+                    </div>
+                    <div class="difficulty-selection" id="difficulty-selection" style="display: none;">
+                        <h4>Select Difficulty</h4>
+                        <div class="difficulty-buttons">
+                            <button class="difficulty-btn" data-difficulty="easy">
+                                <div class="difficulty-title">Easy</div>
+                                <div class="difficulty-desc">Beginner Friendly</div>
+                                <div class="difficulty-subtitle">Random Strategy</div>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="medium">
+                                <div class="difficulty-title">Medium</div>
+                                <div class="difficulty-desc">Balanced Challenge</div>
+                                <div class="difficulty-subtitle">Smart Moves</div>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="hard">
+                                <div class="difficulty-title">Hard</div>
+                                <div class="difficulty-desc">Strategic AI</div>
+                                <div class="difficulty-subtitle">Minimax Algorithm</div>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="expert">
+                                <div class="difficulty-title">Expert</div>
+                                <div class="difficulty-desc">Master Level</div>
+                                <div class="difficulty-subtitle">Deep Analysis</div>
+                            </button>
+                        </div>
+                        <button class="back-btn" id="back-to-mode">← Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules popup (hidden by default) -->
+        <div class="rules-popup" id="rules-popup">
+            <div class="rules-content">
+                <div class="rules-header">
+                    <h3>Traditional Pallanguzhi Rules</h3>
+                    <button class="close-btn" id="close-rules">×</button>
+                </div>
+                <div class="rules-body">
+                    <ul>
+                        <li>Each hole starts with 5 dots.</li>
+                        <li>Pick any hole on your side and take all the dots.</li>
+                        <li>Drop one dot in each hole, moving around the board.</li>
+                        <li>After last dot you drop lands, Pickup the dots from the next hole and keep going.</li>
+                        <li>Your turn ends if you land in a hole and the next two holes are empty.</li>
+                        <li>You score points when you land in a hole, the next hole is empty, and you take the dots from the hole after that.</li>
+                        <li>The player with the most dots at the end wins!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- About popup (hidden by default) -->
+        <div class="about-popup" id="about-popup">
+            <div class="about-content">
+                <div class="about-header">
+                    <h3>About Pallanguzhi</h3>
+                    <button class="close-btn" id="close-about">×</button>
+                </div>
+                <div class="about-body">
+                    <div class="about-section">
+                        <h4>Ancient Tamil Game</h4>
+                        <p>Pallanguzhi is a traditional board game from Tamil Nadu, South India. It belongs to the Mancala family of games and has been played for over 1,000 years.</p>
+                    </div>
+                    <div class="about-section">
+                        <h4>Cultural Heritage</h4>
+                        <p>This game was traditionally played by women and children using tamarind seeds on wooden boards carved with holes. It helped develop mathematical skills and strategic thinking.</p>
+                    </div>
+                    <div class="about-section">
+                        <h4>Digital Revival</h4>
+                        <p>This retro-styled digital version preserves the authentic gameplay while making it accessible to modern players worldwide. Experience the wisdom of ancient Tamil culture!</p>
+                    </div>
+                    <div class="about-section">
+                        <h4>Developed by Ziora Studios</h4>
+                        <p>Ziora Studios is dedicated to preserving cultural heritage through innovative digital experiences. We specialize in bringing traditional games and stories to the modern world with authentic gameplay and engaging user experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button if needed
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Install App';
+            installBtn.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1000;
+                background: #000;
+                color: #fff;
+                border: 2px solid #fff;
+                padding: 8px 16px;
+                font-family: 'Courier New', monospace;
+                cursor: pointer;
+            `;
+            
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        installBtn.remove();
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            
+            document.body.appendChild(installBtn);
+        });
+    </script>
+</body>
+
+</html>
