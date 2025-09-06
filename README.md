@@ -22,7 +22,7 @@ Pallanguzhi is an ancient Tamil board game from South India, belonging to the Ma
 
 ## 🚀 Play Online
 
-Visit [Live Demo](https://pallanguzhi-web-game.vercel.app) to play now!
+Visit [Live Demo](https://pallanguzhi-web.vercel.app) to play now!
 
 ## 🛠️ Technology Stack
 
@@ -51,8 +51,8 @@ Visit [Live Demo](https://pallanguzhi-web-game.vercel.app) to play now!
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/ziora-studios/pallanguzhi-web-game.git
-cd pallanguzhi-web-game
+git clone https://github.com/ziora-studios/pallanguzhi-web.git
+cd pallanguzhi-web
 ```
 
 2. Serve the files using a local web server:
@@ -117,8 +117,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🔗 Links
 
-- **Live Demo**: [https://pallanguzhi-web-game.vercel.app](https://pallanguzhi-web-game.vercel.app)
-- **Repository**: [https://github.com/ziora-studios/pallanguzhi-web-game](https://github.com/ziora-studios/pallanguzhi-web-game)
+- **Live Demo**: [https://pallanguzhi-web.vercel.app](https://pallanguzhi-web.vercel.app)
+- **Repository**: [https://github.com/ziora-studios/pallanguzhi-web](https://github.com/ziora-studios/pallanguzhi-web)
 - **Studio Website**: [Ziora Studios](https://ziorastudios.com) *(coming soon)*
 
 ---
